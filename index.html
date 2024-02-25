@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #feedback-output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Restaurant Feedback Form</h1>
+        <form id="feedback-form">
+            <label for="customer-name">Your Name:</label>
+            <input type="text" name="customer-name" id="customer-name" placeholder="Enter your name">
+
+            <label for="customer-location">Your Location:</label>
+            <input type="text" name="customer-location" id="customer-location" placeholder="Enter your location">
+
+            <label for="overall-experience">How would you rate your overall experience?</label>
+            <select name="overall-experience" id="overall-experience">
+                <option value="Excellent">Excellent</option>
+                <option value="Very Good">Very Good</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+                <option value="Poor">Poor</option>
+            </select>
+
+            <label for="dish-name">What dish did you order during your meal?</label>
+            <input type="text" name="dish-name" id="dish-name" placeholder="Enter dish name">
+
+            <label for="taste">How would you describe the taste of the dish?</label>
+            <select name="taste" id="taste">
+                <option value="Delicious">Delicious</option>
+                <option value="Tasty">Tasty</option>
+                <option value="Palatable">Palatable</option>
+                <option value="Satisfying">Satisfying</option>
+                <option value="Delectable">Delectable</option>
+            </select>
+
+            <label for="service">How would you rate the service provided?</label>
+            <select name="service" id="service">
+                <option value="Excellent">Excellent</option>
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Below Average">Below Average</option>
+                <option value="Poor">Poor</option>
+            </select>
+
+            <label for="food-quality">How satisfied were you with the quality of the food?</label>
+            <select name="food-quality" id="food-quality">
+                <option value="Excellent">Excellent</option>
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Below Average">Below Average</option>
+                <option value="Poor">Poor</option>
+            </select>
+
+            <label for="recommendation">Would you recommend us to others?</label>
+            <select name="recommendation" id="recommendation">
+                <option value="Definitely">Definitely</option>
+                <option value="Probably">Probably</option>
+                <option value="Unsure">Unsure</option>
+                <option value="Probably Not">Probably Not</option>
+                <option value="Definitely Not">Definitely Not</option>
+            </select>
+
+            <label for="value-for-money">How would you rate the value for money?</label>
+            <select name="value-for-money" id="value-for-money">
+                <option value="Great">Great</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+                <option value="Poor">Poor</option>
+                <option value="Terrible">Terrible</option>
+            </select>
+
+            <label for="ambiance">How would you rate the ambiance/atmosphere?</label>
+            <select name="ambiance" id="ambiance">
+                <option value="Excellent">Excellent</option>
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Below Average">Below Average</option>
+                <option value="Poor">Poor</option>
+            </select>
+        </form>
+        <button type="button" id="generate-feedback-btn">Generate Feedback</button>
+        <br>
+        <button id="copy-feedback-btn">Step1: Copy</button>
+        <br>
+        <button onclick="loadurlnow()">Step2: Post Feedback</button>
+        <div id="feedback-output"></div>
+    </div>
+
+    <script>
+        // Function to capitalize the first letter of a string
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // Function to generate feedback based on user answers
+        function generateFeedback() {
+            // Get user answers from form
+            const overallExperience = capitalizeFirstLetter(document.getElementById('overall-experience').value);
+            const dishName = capitalizeFirstLetter(document.getElementById('dish-name').value);
+            const taste = capitalizeFirstLetter(document.getElementById('taste').value);
+            const service = capitalizeFirstLetter(document.getElementById('service').value);
+            const foodQuality = capitalizeFirstLetter(document.getElementById('food-quality').value);
+            const recommendation = capitalizeFirstLetter(document.getElementById('recommendation').value);
+            const valueForMoney = capitalizeFirstLetter(document.getElementById('value-for-money').value);
+            const ambiance = capitalizeFirstLetter(document.getElementById('ambiance').value);
+            const customerName = capitalizeFirstLetter(document.getElementById('customer-name').value);
+            const customerLocation = capitalizeFirstLetter(document.getElementById('customer-location').value);
+
+            // Feedback template
+            const feedbackTemplate = `
+            Namaste I am ${customerName}. I am from ${customerLocation}. I recently dined at Shree Mahalaxmi Family Restaurant in Hadapasar Pune Amanora Mall. I was impressed by the ${overallExperience} experience.
+            For my meal, I ordered ${dishName}. The ${dishName} was ${taste}.
+            However, the ${dishName} was a bit ${service}. Overall, the food quality was ${foodQuality}.
+            The price was ${valueForMoney}. Considering the quality and quantity, it was ${recommendation}.
+            Overall, I had a ${ambiance} experience.
+            `;
+
+            // Display generated feedback
+            document.getElementById('feedback-output').innerText = feedbackTemplate;
+        }
+
+        // Event listener for the "Generate Feedback" button
+        document.getElementById('generate-feedback-btn').addEventListener('click', generateFeedback);
+        document.getElementById('copy-feedback-btn').addEventListener('click', function () {
+            const feedbackOutput = document.getElementById('feedback-output').innerText;
+            navigator.clipboard.writeText(feedbackOutput)
+                .then(() => {
+                    alert('Feedback copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy feedback: ', err);
+                });
+        });
+
+        function loadurlnow(){
+            window.location.href = "https://rebrand.ly/de64b4";
+        }
+    </script>
+</body>
+</html>
