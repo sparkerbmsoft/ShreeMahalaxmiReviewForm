@@ -41,16 +41,26 @@
             color: #333;
         }
 
-        input{
+            input[type="text"],
+        input[type="radio"],
+        select {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
-            margin-left:3px:
-            margin-right:3px:
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
+            background-color: #f9f9f9;
         }
+
+        input[type="text"]:focus,
+        input[type="radio"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
 
         button {
             display: block;
